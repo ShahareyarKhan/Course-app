@@ -75,7 +75,7 @@ const Home = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Search course..."
-            className=" w-full  h-10 rounded-full placeholder:text-gray-400 text-gray-700 outline-none flex-1 bg-white pl-5"
+            className=" w-full  border border-black h-10 rounded-full placeholder:text-gray-400 text-gray-700 outline-none flex-1 bg-white pl-5"
           />
         </div>
       </div>
