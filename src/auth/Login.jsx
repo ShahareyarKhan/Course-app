@@ -53,7 +53,7 @@ const Login = () => {
       const userData = localStorage.getItem("user");
       const user = JSON.parse(userData);
 
-      dispatch(setUser(user))
+      dispatch(setUser(user));
       toast.success("User logged in successfully!");
       navigate("/");
     } catch (err) {
@@ -100,22 +100,20 @@ const Login = () => {
                   </div>
                 </div>
               </div>
+              <button
+                type="submit"
+                className="w-full mt-6 rounded-lg p-2 bg-[#5932EA] text-[#fff]"
+              >
+                Login
+              </button>
+              <p className="text-xs text-center pt-2 text-[#5932EA]">
+                Don&apos;t have an account?{" "}
+                <span className="text-[#5932EA]">
+                  <Link to="/register">Register</Link>
+                </span>
+              </p>
             </form>
           </CardContent>
-          <CardFooter className=" flex flex-col space-y-2 justify-center items-center">
-            <button
-              type="submit"
-              className="w-full rounded-lg p-2 bg-[#5932EA] text-[#fff]"
-            >
-              Login
-            </button>
-            <p className="text-xs text-[#5932EA]">
-              Don&apos;t have an account?{" "}
-              <span className="text-[#5932EA]">
-                <Link to="/register">Register</Link>
-              </span>
-            </p>
-          </CardFooter>
         </div>
       </Card>
     </main>

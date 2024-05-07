@@ -112,22 +112,20 @@ const Register = () => {
                   </div>
                 </div>
               </div>
+                <button
+                  type="submit"
+                  className="w-full mt-6 rounded-lg p-2 bg-[#5932EA] text-[#fff]"
+                >
+                  Register
+                </button>
+                <p className="text-xs text-center pt-2 text-[#5932EA]">
+                  Already have an account?{" "}
+                  <span className="text-[#5932EA]">
+                    <Link to="/login">Login</Link>
+                  </span>
+                </p>
             </form>
           </CardContent>
-          <CardFooter className=" flex flex-col space-y-2 justify-center items-center">
-            <button
-              type="submit"
-              className="w-full rounded-lg p-2 bg-[#5932EA] text-[#fff]"
-            >
-              Register
-            </button>
-            <p className="text-xs text-[#5932EA]">
-              Already have an account?{" "}
-              <span className="text-[#5932EA]">
-                <Link to="/login">Login</Link>
-              </span>
-            </p>
-          </CardFooter>
         </div>
       </Card>
     </main>
