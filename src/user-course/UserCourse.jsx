@@ -11,7 +11,7 @@ const UserCourse = () => {
   const userCourses = useUserCourses();
 
   return (
-    <div className="">
+    <div className="flex flex-col justify-center items-center">
       <div className="max-w-[65rem] mt-10 mx-auto">
         <div className="text-[#5932EA] text-3xl font-bold mb-10 px-10 md:px-0">
           My Courses
