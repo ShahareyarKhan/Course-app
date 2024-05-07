@@ -16,10 +16,10 @@ To install and run this project locally, add the following commands in your term
 
 1. Clone the repository from GitHub:
 
-   ```bash
-   `git clone https://github.com/omkargade04/react-firebase-course.git`
+```bash
+    `git clone https://github.com/omkargade04/react-firebase-course.git`
 
-   ```
+```
 
 2. Navigate into the project directory:
 
