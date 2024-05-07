@@ -68,7 +68,7 @@ const Register = () => {
             <CardTitle className="mb-2 text-[#5932EA]">Register</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center ">
               <div className="text-[#5932EA] grid items-center gap-4">
                 <div className="flex flex-col w-[10rem] lg:w-[25rem] space-y-2">
                   <div className="flex flex-col">
