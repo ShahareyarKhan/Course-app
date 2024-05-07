@@ -2,9 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import CourseData from "../components/course/CourseData";
+import UserCourseData from "../components/course/UserCourseData";
 import { useUserCourses } from "./userCourseData";
-import { useSelector } from "react-redux";
 
 const UserCourse = () => {
 
@@ -19,7 +18,7 @@ const UserCourse = () => {
         {userCourses.length > 0 && (
           <div className="px-10 md:px-0 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-10">
             {userCourses.map((course) => (
-              <CourseData key={course.id} course={course} />
+              <UserCourseData key={course.id} course={course} />
             ))}
           </div>
         )}
