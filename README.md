@@ -6,6 +6,16 @@ React-Firebase-Course-Website
 
 Developed a web application for showcasing a list of courses and their details using React. Implemented the course listing page, a course details page, and a student dashboard to display enrolled courses. Implemented course like feature
 
+## Features
+
+- This is a project for a Course Website which allows user to enroll for courses and user can see their enrolled courses in "My Courses" section. 
+
+- Used React.js and Tailwind CSS to create user friendly interface 
+
+- Used Firebase for authentication and fetching & updating courses from the firestore. Also implemented course like feature.
+
+- Used Redux for managing state of application. Implemented redux in user authentication and course enrollment.
+ 
 ## View Website
 
 Here is the deployed link to the website: [Deployed Link:](https://react-firebase-course-bice.vercel.app/)
