@@ -70,8 +70,8 @@ const Login = () => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit}>
-              <div className="text-[#5932EA] lg:w-[25rem] grid items-center gap-4">
-                <div className="flex flex-col space-y-2">
+              <div className="text-[#5932EA] grid items-center gap-4">
+                <div className="flex flex-col w-[10rem] lg:w-[25rem] space-y-2">
                   <div className="flex flex-col">
                     <label htmlFor="name">Email</label>
                     <input
@@ -102,7 +102,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full mt-6 rounded-lg p-2 bg-[#5932EA] text-[#fff]"
+                className=" w-[10rem] sm:w-full mt-6 rounded-lg p-2 bg-[#5932EA] text-[#fff]"
               >
                 Login
               </button>
