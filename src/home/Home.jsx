@@ -35,16 +35,20 @@ const Home = () => {
     getCourses();
   }, []);
 
-  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { course } = useSelector((state) => state);
 
+  const userToken = localStorage.getItem("token");
+  const userData = localStorage.getItem("user");
+
+  const token = JSON.parse(userToken);
+  const user = JSON.parse(userData);
+
   const fetchUserData = async () => {
     try {
-      if (currentUser) {
-        console.log("This is user data: ", currentUser);
-        dispatch(setUser(currentUser));
+      if (token) {
+        dispatch(setUser(user));
       } else {
         console.log("No such document!");
         navigate("/login");
@@ -58,7 +62,6 @@ const Home = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
-
 
   return (
     <div className="max-w-[65rem] mt-10 mx-auto">

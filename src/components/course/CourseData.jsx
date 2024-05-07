@@ -11,11 +11,13 @@ import { useSelector } from "react-redux";
 
 const CourseData = ({ course }) => {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
-  const userId = user.uid;
-  const [switchColor, setSwitchColor] = useState("");
+  // const { user } = useSelector((state) => state.user);
+  // const userId = user.uid
+
+  const user = localStorage.getItem("userId");
+  const userId = JSON.parse(user)
+
   const [likes, setLikes] = useState(0);
-  const [liked, setLiked] = useState(false);
 
   const handleClick = async () => {
 
@@ -36,7 +38,6 @@ const CourseData = ({ course }) => {
     //Store the likes in localstorage before logging out and then retrive it while logging in using redux
   };
 
-  console.log(course);
 
   return (
     <div className="">

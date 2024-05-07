@@ -1,13 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { addCourse } from "../redux/slices/courseSlice";
 
 export const useUserCourses = () => {
-  const { user } = useSelector((state) => state.user);
-  const userId = user.uid;
+  // const { user } = useSelector((state) => state.user);
+  // const userId = user.uid
+
+  const user = localStorage.getItem("userId");
+  const userId = JSON.parse(user)
+  console.log(userId)
   const [userCourses, setUserCourses] = useState([]);
   const dispatch = useDispatch();
 
@@ -28,7 +32,7 @@ export const useUserCourses = () => {
         })
       );
       setUserCourses(coursesData);
-      dispatch(addCourse({ courses: coursesData })); 
+      dispatch(addCourse({ course: coursesData })); 
     } catch (err) {
       console.log("Error fetching user courses:", err);
     }

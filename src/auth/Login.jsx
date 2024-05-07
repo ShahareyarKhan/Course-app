@@ -17,10 +17,14 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../lib/firebase";
 import { useDispatch } from "react-redux";
 import { addCourse } from "../redux/slices/courseSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { setUser } from "../redux/slices/userSlice";
 
 const Login = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const auth = getAuth(app);
+  const [currentUser] = useAuthState(auth);
+
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
@@ -34,18 +38,24 @@ const Login = () => {
     const password = userData.password;
 
     try {
-      const response = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      )
-      const storedUserCourses = localStorage.getItem('courses');
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const storedUserCourses = localStorage.getItem("courses");
       if (storedUserCourses) {
         // Parse stored data and initialize Redux state with it
         dispatch(addCourse(JSON.parse(storedUserCourses)));
       }
+
+      localStorage.setItem("name", JSON.stringify(currentUser.displayName));
+      localStorage.setItem("token", JSON.stringify(currentUser.accessToken));
+      localStorage.setItem("userId", JSON.stringify(currentUser.uid));
+      localStorage.setItem("user", JSON.stringify(currentUser));
+
+      const userData = localStorage.getItem("user");
+      const user = JSON.parse(userData);
+
+      dispatch(setUser(user))
       toast.success("User logged in successfully!");
-      navigate('/');
+      navigate("/");
     } catch (err) {
       console.log("Error: ", err);
     }
@@ -70,7 +80,9 @@ const Login = () => {
                       placeholder="Email address"
                       className="mt-2 rounded-lg border border-zinc-500 p-2"
                       value={userData.email}
-                      onChange={(e) => setUserData({...userData, email: e.target.value})}
+                      onChange={(e) =>
+                        setUserData({ ...userData, email: e.target.value })
+                      }
                     />
                   </div>
                   <div className="flex flex-col">
@@ -81,7 +93,9 @@ const Login = () => {
                       placeholder="Password"
                       className="mt-2 rounded-lg border border-zinc-500 p-2"
                       value={userData.password}
-                      onChange={(e) => setUserData({...userData, password: e.target.value})}
+                      onChange={(e) =>
+                        setUserData({ ...userData, password: e.target.value })
+                      }
                     />
                   </div>
                 </div>

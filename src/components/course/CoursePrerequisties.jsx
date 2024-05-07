@@ -3,7 +3,6 @@
 import React from "react";
 
 const CoursePrerequistes = ({ prerequisites }) => {
-  console.log(prerequisites);
   return (
     <div>
       <h1 className="text-2xl font-semibold text-[#5932EA]">Prerequisites</h1>

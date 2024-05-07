@@ -54,7 +54,6 @@ const CoursePage = () => {
         students: courseData.students,
         syllabus: courseData.syllabus,
       });
-      console.log("Course Data:", courseData);
     } catch (err) {
       console.log("Error: ", err);
     }
