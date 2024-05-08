@@ -56,7 +56,10 @@ const Register = () => {
       toast.success("User created successfully!");
       navigate("/login");
     } catch (err) {
-      console.log("Error: ", err);
+      console.log("Error: ", err.message);
+      const errorCode = err.message.includes('auth/') ? err.message.split('auth/')[1] : err.message;
+      const error = errorCode.slice(0, -2);
+      toast.error(error);
     }
   };
 

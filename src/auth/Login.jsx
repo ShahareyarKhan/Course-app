@@ -45,6 +45,7 @@ const Login = () => {
         dispatch(addCourse(JSON.parse(storedUserCourses)));
       }
 
+
       localStorage.setItem("name", JSON.stringify(currentUser.displayName));
       localStorage.setItem("token", JSON.stringify(currentUser.accessToken));
       localStorage.setItem("userId", JSON.stringify(currentUser.uid));
@@ -57,7 +58,10 @@ const Login = () => {
       toast.success("User logged in successfully!");
       navigate("/");
     } catch (err) {
-      console.log("Error: ", err);
+      console.log("Error: ", err.message);
+      const errorCode = err.message.includes('auth/') ? err.message.split('auth/')[1] : err.message;
+      const error = errorCode.slice(0, -2);
+      toast.error(error);
     }
   };
 
