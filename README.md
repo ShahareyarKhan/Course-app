@@ -51,13 +51,17 @@ To install and run this project locally, add the following commands in your term
    `npm install`
 ```
 
-6. Run the below command to start the project
+6. Create a .env file in the directory and add your **firebase** credentials accordingly
+
+7. In your firestore database create two collections named **courses** and **users** and add dummy courses to use locally
+
+8. Run the below command to start the project
 
 ```bash
    `npm run dev`
 ```
 
-7. Open `http://localhost:5173` on your browser to view the project locally
+8. Open `http://localhost:5173` on your browser to view the project locally
 
 ## Images
 
