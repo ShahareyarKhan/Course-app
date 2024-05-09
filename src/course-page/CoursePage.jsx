@@ -19,8 +19,8 @@ const CoursePage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [user] = useAuthState(auth);
-  const { user } = useSelector((state) => state.user)
+  const [user] = useAuthState(auth);
+  // const { user } = useSelector((state) => state.user)
   const [course, setCourse] = useState({
     id: "",
     name: "",
