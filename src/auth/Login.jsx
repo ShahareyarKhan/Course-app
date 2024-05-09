@@ -45,8 +45,6 @@ const Login = () => {
         dispatch(addCourse(JSON.parse(storedUserCourses)));
       }
 
-
-      localStorage.setItem("name", JSON.stringify(currentUser.displayName));
       localStorage.setItem("token", JSON.stringify(currentUser.accessToken));
       localStorage.setItem("userId", JSON.stringify(currentUser.uid));
       localStorage.setItem("user", JSON.stringify(currentUser));
