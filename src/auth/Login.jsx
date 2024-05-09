@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -17,13 +16,11 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../lib/firebase";
 import { useDispatch } from "react-redux";
 import { addCourse } from "../redux/slices/courseSlice";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { setUser } from "../redux/slices/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
   const auth = getAuth(app);
-  const [currentUser] = useAuthState(auth);
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
@@ -45,6 +42,9 @@ const Login = () => {
         dispatch(addCourse(JSON.parse(storedUserCourses)));
       }
 
+      const currentUser = response.user
+
+      localStorage.setItem("name", JSON.stringify(currentUser.displayName));
       localStorage.setItem("token", JSON.stringify(currentUser.accessToken));
       localStorage.setItem("userId", JSON.stringify(currentUser.uid));
       localStorage.setItem("user", JSON.stringify(currentUser));
