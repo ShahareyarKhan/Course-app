@@ -11,11 +11,11 @@ import { useSelector } from "react-redux";
 
 const CourseData = ({ course }) => {
   const navigate = useNavigate();
-  // const { user } = useSelector((state) => state.user);
-  // const userId = user.uid
+  const { user } = useSelector((state) => state.user);
+  const userId = user.uid
 
-  const user = localStorage.getItem("userId");
-  const userId = JSON.parse(user)
+  // const user = localStorage.getItem("userId");
+  // const userId = JSON.parse(user)
 
   const [likes, setLikes] = useState(0);
 

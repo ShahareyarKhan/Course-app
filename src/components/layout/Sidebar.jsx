@@ -25,10 +25,10 @@ const Sidebar = () => {
   };
   const { course } = useSelector((state) => state);
   const { user } = useSelector((state) => state.user);
+  const username = user.displayName;
 
-  const name = localStorage.getItem("name");
-  const username = JSON.parse(name);
-
+  // const name = localStorage.getItem("name");
+  // const username = JSON.parse(name);
 
   const handleLogout = async () => {
     try {

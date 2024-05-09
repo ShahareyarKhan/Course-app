@@ -6,9 +6,7 @@ import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { cn } from "@/lib/utils";
 
 const Switch = React.forwardRef(({ className, switchColor, ...props }, ref) => {
-  console.log(switchColor);
   const bgColorClass = switchColor === "black" ? "bg-black" : "bg-green-500";
-  console.log(bgColorClass);
   return (
     <SwitchPrimitives.Root
       className={cn(

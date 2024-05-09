@@ -13,13 +13,14 @@ import CoursePrerequistes from "../components/course/CoursePrerequisties";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../lib/firebase";
 import { toast } from "sonner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CoursePage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
+  const { user } = useSelector((state) => state.user)
   const [course, setCourse] = useState({
     id: "",
     name: "",

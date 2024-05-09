@@ -9,8 +9,17 @@ import Register from "./auth/Register";
 import Sidebar from "./components/layout/Sidebar";
 import CoursePage from "./course-page/CoursePage";
 import UserCourse from "./user-course/UserCourse";
+import { useDispatch } from "react-redux";
+import { setUser } from "../src/redux/slices/userSlice";
+
 
 const Layout = ({ children, withSidebar }) => {
+
+  const dispatch = useDispatch()
+  const userData = localStorage.getItem("user");
+  const user = JSON.parse(userData);
+  dispatch(setUser(user));
+  
   return (
     <main className="flex">
       {withSidebar && (
