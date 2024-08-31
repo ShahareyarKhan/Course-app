@@ -11,6 +11,7 @@ import CoursePage from "./course-page/CoursePage";
 import UserCourse from "./user-course/UserCourse";
 import { useDispatch } from "react-redux";
 import { setUser } from "../src/redux/slices/userSlice";
+import Profile from "./components/Profile";
 
 
 const Layout = ({ children, withSidebar }) => {
@@ -48,6 +49,7 @@ const App = () => {
         />
         <Route path="/login" element={<Layout>{<Login />}</Layout>} />
         <Route path="/register" element={<Layout>{<Register />}</Layout>} />
+        <Route path="/profile" element={<Layout>{<Profile/>}</Layout>} />
       </Routes>
     </main>
   );

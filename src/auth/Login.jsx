@@ -65,15 +65,15 @@ const Login = () => {
 
   return (
     <main className="flex justify-center items-center h-screen bg-[#fff]">
-      <Card className="w-3/4 sm:w-1/3 py-2 lg:py-4 rounded-xl text-white  shadow-2xl flex justify-center items-center">
-        <div className="">
-          <CardHeader className="lg:mb-5 flex justify-center items-center ">
-            <CardTitle className="mb-2 text-[#5932EA]">Login</CardTitle>
+      <Card className="w-5/6 md:w-3/4 max-w-[500px]  py-2 lg:py-4 rounded-xl text-white   flex justify-center items-center">
+        <div className="w-full">
+          <CardHeader className="lg:mb-5 flex justify-center items-center w-full ">
+            <CardTitle className="mb-2  text-[#5932EA] w-full text-center">Login</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center ">
-              <div className="text-[#5932EA] grid items-center gap-4">
-                <div className="flex flex-col w-[10rem] lg:w-[25rem] space-y-2">
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center w-full">
+              <div className="text-[#5932EA] grid items-center w-full gap-4">
+                <div className="flex flex-col w-full space-y-2">
                   <div className="flex flex-col">
                     <label htmlFor="name">Email</label>
                     <input

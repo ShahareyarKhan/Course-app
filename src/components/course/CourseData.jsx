@@ -1,54 +1,34 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../lib/firebase";
 import { useSelector } from "react-redux";
 
 const CourseData = ({ course }) => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const userId = user.uid
+  const userId = user ? user.uid : null;
 
-  // const user = localStorage.getItem("userId");
-  // const userId = JSON.parse(user)
+  const [likes, setLikes] = useState(course.likes || []);
 
-  const [likes, setLikes] = useState(0);
-
-  const handleClick = async () => {
-
-    const courseRef = doc(db, "courses", course.id);
-    const courseSnapshot = await getDoc(courseRef);
-    const courseData = courseSnapshot.data();
-
-    if (!courseData.likes.includes(userId)) {
-      const updatedLikes = [...courseData.likes, userId];
-      await updateDoc(courseRef, { likes: updatedLikes });
-      setLikes(updatedLikes.length);
+  const handleClick = () => {
+    if (likes.includes(userId)) {
+      setLikes(likes.filter((id) => id !== userId));
     } else {
-      const updatedLikes = courseData.likes.filter((uid) => uid !== userId);
-      await updateDoc(courseRef, { likes: updatedLikes });
-      setLikes(updatedLikes.length);
+      setLikes([...likes, userId]);
     }
-    window.location.reload();
-    //Store the likes in localstorage before logging out and then retrive it while logging in using redux
   };
-
 
   return (
     <div className="">
-      <Card className="w-full max-w-md rounded-xl bg-[#fff]">
+      <Card className="shadow-md shadow-gray-400 w-full max-w-md rounded bg-[#fff]">
         <img
           alt="Card Image"
-          className="object-cover rounded-t-xl"
+          className=" rounded-t  h-[200px] w-full object-fill"
           src={course.thumbnail}
         />
         <CardContent className="p-4 space-y-4">
-          <CardTitle className="text-2xl font-bold text-black">
+          <CardTitle className="text-xl lg:text-2xl font-bold text-black">
             {course.name.slice(0, 20)}...
           </CardTitle>
           <p className="text-gray-500 dark:text-gray-400">
@@ -64,13 +44,11 @@ const CourseData = ({ course }) => {
             <div className="flex justify-center items-center gap-x-2">
               <FaHeart
                 className={`h-10 w-10 border rounded-lg p-2 shadow-lg hover:cursor-pointer ${
-                  Array.isArray(course.likes) && course.likes.includes(userId)
-                    ? "text-red-500"
-                    : ""
+                  likes.includes(userId) ? "text-red-500" : ""
                 }`}
                 onClick={handleClick}
               />
-              <span>{course.likes.length}</span>
+              <span>{likes.length}</span>
             </div>
           </div>
         </CardContent>

@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 "use client";
-
 import { toast } from "sonner";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,19 +8,16 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   updateProfile,
 } from "firebase/auth";
-import { app } from "../lib/firebase";
+import { auth } from "../lib/firebase"; // Import the auth instance
 
 const Register = () => {
-  const auth = getAuth(app);
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     username: "",
@@ -32,52 +28,44 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const username = userData.username;
-    const email = userData.email;
-    const password = userData.password;
+    const { username, email, password } = userData;
 
     if (!username || !email || !password) {
-      toast.error("All fields required");
+      toast.error("All fields are required");
+      return; // Prevent further execution
     }
 
     if (password.length < 6) {
-      toast.error("Password must be atleast 6 characters");
+      toast.error("Password must be at least 6 characters");
+      return; // Prevent further execution
     }
 
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      await updateProfile(response.user, {
-        displayName: username,
-      });
+      const response = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(response.user, { displayName: username });
       toast.success("User created successfully!");
       navigate("/login");
     } catch (err) {
-      console.log("Error: ", err.message);
-      const errorCode = err.message.includes('auth/') ? err.message.split('auth/')[1] : err.message;
-      const error = errorCode.slice(0, -2);
-      toast.error(error);
+      console.log("Error: ", err);
+      toast.error(`Error: ${err.message}`);
     }
   };
 
   return (
     <main className="flex justify-center items-center h-screen bg-[#fff]">
-      <Card className="w-3/4 sm:w-1/3 py-2 lg:py-4 rounded-xl text-white  shadow-2xl flex justify-center items-center">
-        <div className="">
-          <CardHeader className="lg:mb-5 flex justify-center items-center ">
-            <CardTitle className="mb-2 text-[#5932EA]">Register</CardTitle>
+      <Card className="w-5/6 md:w-3/4 max-w-[500px] py-2 lg:py-4 rounded-xl text-white  flex justify-center items-center">
+        <div className="w-full">
+          <CardHeader className="lg:mb-5 flex justify-center items-center w-full">
+            <CardTitle className="mb-2 text-[#5932EA] w-full text-center">Register</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center ">
-              <div className="text-[#5932EA] grid items-center gap-4">
-                <div className="flex flex-col w-[10rem] lg:w-[25rem] space-y-2">
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center w-full">
+              <div className="text-[#5932EA] grid items-center w-full gap-4">
+                <div className="flex flex-col w-full space-y-2">
                   <div className="flex flex-col">
-                    <label htmlFor="name">Username</label>
+                    <label htmlFor="username">Username</label>
                     <input
-                      id="name"
+                      id="username"
                       type="text"
                       placeholder="Username"
                       className="mt-2 rounded-lg border border-zinc-500 p-2"
@@ -88,9 +76,9 @@ const Register = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label htmlFor="name">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input
-                      id="name"
+                      id="email"
                       type="text"
                       placeholder="Email address"
                       className="mt-2 rounded-lg border border-zinc-500 p-2"
@@ -115,18 +103,18 @@ const Register = () => {
                   </div>
                 </div>
               </div>
-                <button
-                  type="submit"
-                  className="sm:w-full w-[10rem] mt-6 rounded-lg p-2 bg-[#5932EA] text-[#fff]"
-                >
-                  Register
-                </button>
-                <p className="text-xs text-center pt-2 text-[#5932EA]">
-                  Already have an account?{" "}
-                  <span className="text-[#5932EA]">
-                    <Link to="/login">Login</Link>
-                  </span>
-                </p>
+              <button
+                type="submit"
+                className="w-[10rem] sm:w-full mt-6 rounded-lg p-2 bg-[#5932EA] text-[#fff]"
+              >
+                Register
+              </button>
+              <p className="text-xs text-center pt-2 text-[#5932EA]">
+                Already have an account?{" "}
+                <span className="text-[#5932EA]">
+                  <Link to="/login">Login</Link>
+                </span>
+              </p>
             </form>
           </CardContent>
         </div>
